@@ -1,0 +1,128 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "MaxArena (Debug)",
+			"request": "launch",
+			"preLaunchTask": "MaxArena Win64 Debug Build",
+			"program": "C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\Binaries\\Win64\\UE4-Win64-Debug.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.27",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MaxArena (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "MaxArena Win64 DebugGame Build",
+			"program": "C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\Binaries\\Win64\\UE4-Win64-DebugGame.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.27",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MaxArena (Development)",
+			"request": "launch",
+			"preLaunchTask": "MaxArena Win64 Development Build",
+			"program": "C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\Binaries\\Win64\\UE4.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.27",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MaxArena (Shipping)",
+			"request": "launch",
+			"preLaunchTask": "MaxArena Win64 Shipping Build",
+			"program": "C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\Binaries\\Win64\\UE4-Win64-Shipping.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.27",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MaxArena (Test)",
+			"request": "launch",
+			"preLaunchTask": "MaxArena Win64 Test Build",
+			"program": "C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\Binaries\\Win64\\UE4-Win64-Test.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.27",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MaxArenaEditor (Debug)",
+			"request": "launch",
+			"preLaunchTask": "MaxArenaEditor Win64 Debug Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Binaries\\Win64\\UE4Editor-Win64-Debug.exe",
+			"args": [
+				"C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\MaxArena.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.27",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MaxArenaEditor (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "MaxArenaEditor Win64 DebugGame Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Binaries\\Win64\\UE4Editor-Win64-DebugGame.exe",
+			"args": [
+				"C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\MaxArena.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.27",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "MaxArenaEditor (Development)",
+			"request": "launch",
+			"preLaunchTask": "MaxArenaEditor Win64 Development Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\MaxArena.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.27",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Generate Project Files",
+			"type": "clr",
+			"request": "launch",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Binaries\\DotNET\\UnrealBuildTool.exe",
+			"console": "externalTerminal",
+			"args": [
+				"-projectfiles",
+				"-vscode",
+				"-project=C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\MaxArena.uproject",
+				"-game",
+				"-engine"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.27"
+		}
+	]
+}

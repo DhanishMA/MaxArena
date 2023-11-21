@@ -1,0 +1,27 @@
+[
+	{
+		"file": "C:\\\\Users\\\\DhanishMA\\\\Documents\\\\GitHub\\\\MaxArena\\\\MaxArena\\\\Source\\\\MaxArena\\\\MaxArena.Build.cs",
+		"command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe @\"C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\.vscode\\compileCommands_MaxArena\\MaxArena.210.rsp\"",
+		"directory": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\DhanishMA\\\\Documents\\\\GitHub\\\\MaxArena\\\\MaxArena\\\\Source\\\\MaxArena\\\\MaxArena.cpp",
+		"command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe @\"C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\.vscode\\compileCommands_MaxArena\\MaxArena.210.rsp\"",
+		"directory": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\DhanishMA\\\\Documents\\\\GitHub\\\\MaxArena\\\\MaxArena\\\\Source\\\\MaxArena\\\\MaxArena.h",
+		"command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe @\"C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\.vscode\\compileCommands_MaxArena\\MaxArena.210.rsp\"",
+		"directory": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\DhanishMA\\\\Documents\\\\GitHub\\\\MaxArena\\\\MaxArena\\\\Source\\\\MaxArena\\\\MaxArenaGameModeBase.cpp",
+		"command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe @\"C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\.vscode\\compileCommands_MaxArena\\MaxArena.210.rsp\"",
+		"directory": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\DhanishMA\\\\Documents\\\\GitHub\\\\MaxArena\\\\MaxArena\\\\Source\\\\MaxArena\\\\MaxArenaGameModeBase.h",
+		"command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe @\"C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\MaxArena\\.vscode\\compileCommands_MaxArena\\MaxArena.210.rsp\"",
+		"directory": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Source"
+	}
+]
