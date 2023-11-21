@@ -1,0 +1,15 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-MaxArena.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\DhanishMA\Documents\Unreal Projects\MaxArena\Intermediate\Build\Win64\MaxArenaEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\DhanishMA\Documents\Unreal Projects\MaxArena\Intermediate\Build\Win64\UE4Editor\Development\MaxArena\MaxArena.cpp.obj"
+"C:\Users\DhanishMA\Documents\Unreal Projects\MaxArena\Intermediate\Build\Win64\UE4Editor\Development\MaxArena\MaxArenaGameModeBase.cpp.obj"
+"C:\Users\DhanishMA\Documents\Unreal Projects\MaxArena\Intermediate\Build\Win64\UE4Editor\Development\MaxArena\MaxArena.init.gen.cpp.obj"
+"C:\Users\DhanishMA\Documents\Unreal Projects\MaxArena\Intermediate\Build\Win64\UE4Editor\Development\MaxArena\MaxArenaGameModeBase.gen.cpp.obj"
+"C:\Users\DhanishMA\Documents\Unreal Projects\MaxArena\Intermediate\Build\Win64\UE4Editor\Development\MaxArena\Default.rc2.res"
+/OUT:"C:\Users\DhanishMA\Documents\Unreal Projects\MaxArena\Intermediate\Build\Win64\UE4Editor\Development\MaxArena\UE4Editor-MaxArena.lib"
