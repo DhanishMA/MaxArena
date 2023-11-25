@@ -20,16 +20,14 @@ void AHeroController::BeginPlay()
 
 //Accept value from 0 to number of 'characters-1' and switch to respective character represented by this value. The function returns the value 
 //of the new characters index
-int AHeroController::SwitchCharacter(int index)
+int AHeroController::SwitchCharacter(int CharacterIndex)
 {   
     if (CharacterArray.Num() <= 0) return 0;
     int MaxArrSize = CharacterArray.Num();
-    index = FMath::Clamp(index, 0, MaxArrSize-1); 
-    UE_LOG(LogTemp, Warning, TEXT("Character Array Index %d"), index);
-    UE_LOG(LogTemp, Warning, TEXT("MaxArrSize %d"), MaxArrSize);
-    SpawnCharacter(&CharacterArray[index]);
+    CharacterIndex = FMath::Clamp(CharacterIndex, 0, MaxArrSize-1); 
+    SpawnCharacter(&CharacterArray[CharacterIndex]);
 
-    return index;
+    return CharacterIndex;
 
 }
 
@@ -53,7 +51,7 @@ void AHeroController::SpawnCharacter(TSubclassOf<ACharacter> *newCharacterClass)
         UnPossess();
         CurrentPawn->Destroy();
         ACharacter* newCharacter = GetWorld()->SpawnActor<ACharacter>(*newCharacterClass, SpawnTransform);
-        if(newCharacter != nullptr) Possess(newCharacter);
+        if(newCharacter) Possess(newCharacter);
     }
     
 }

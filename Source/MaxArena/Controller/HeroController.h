@@ -18,7 +18,7 @@ class MAXARENA_API AHeroController : public APlayerController
 public:
 	AHeroController();
 	UFUNCTION(BlueprintCallable)
-	int SwitchCharacter(int index);
+	int SwitchCharacter(int CharacterIndex);
 
 protected:
 	UPROPERTY(EditDefaultsOnly)
