@@ -16,39 +16,51 @@ class MAXARENA_API UGraphicsSettingsWidget : public UUserWidget
 	
 protected:
 	virtual bool Initialize() override;
+	UFUNCTION(BlueprintCallable)
+	void WidgetSetup();
 
-public:
+private:
 	class UGameUserSettings*  GameUserSettings;
+
+protected:
+	
 	UFUNCTION(BlueprintCallable)
 	void ApplyGraphicsSettings();
-
-	int AntiAliasingValue  = 3;
-
-
-public:
-	// void IncreaseGraphics(TFunction<void(int value)> Function);
-	// void DecreaseGraphics(TFunction<void(int value)> Function);
-	// void GraphicsSwitch(TFunction<void(int value)> Function);
-
-
+	
+	UFUNCTION(BlueprintCallable)
 	void EnableHDR(bool value);
+	
+	UFUNCTION(BlueprintCallable)
 	void EnableVSync(bool value);
+	
 	UFUNCTION(BlueprintCallable)
-	void SetAntiAliasing(int value);
+	void SetAntiAliasing(int32 value);
+	
+	UFUNCTION(BlueprintCallable)
 	void SetFrameRate(int value);
+	
 	UFUNCTION(BlueprintCallable)
-	void SetGlobalIllumination(int value);
-	void SetOverallScalability(int value);
+	void SetOverallScalability(int32 value);
+	
 	UFUNCTION(BlueprintCallable)
-	void SetPostProcessing(int value);
+	void SetPostProcessing(int32 value);
+	
 	UFUNCTION(BlueprintCallable)
-	void SetReflection(int value);
+	void SetShading(int32 value);
+	
 	UFUNCTION(BlueprintCallable)
-	void SetScreenResolution(int value);
-	void SetShading(int value);
-	void SetShadow(int value);
-	void SetTexture(int value);
-	void SetViewDistance(int value);
-	void SetVisualEffects(int value);
+	void SetShadow(int32 value);
+	
+	UFUNCTION(BlueprintCallable)
+	void SetTexture(int32 value);
+	
+	UFUNCTION(BlueprintCallable)
+	void SetViewDistance(int32 value);
+	
+	UFUNCTION(BlueprintCallable)
+	void SetVisualEffects(int32 value);
+	
+	UFUNCTION(BlueprintCallable)
+	void ValidateGaphicsSettings();
 
 };

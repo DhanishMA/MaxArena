@@ -12,32 +12,41 @@ bool UGraphicsSettingsWidget::Initialize()
 
     GameUserSettings = GEngine->GetGameUserSettings();
 
-    // IncreaseGraphics(SetAntiAliasing(4));
-
     return true;
 }
 
-// void UGraphicsSettingsWidget::IncreaseGraphics(TFunction<void(int value)> Function)
-// {
-    
-// }
+void UGraphicsSettingsWidget::WidgetSetup()
+{
+    AddToViewport();
+    SetVisibility(ESlateVisibility::Visible);
+    bIsFocusable = true;
 
-// // void UGraphicsSettingsWidget::DecreaseGraphics(TFunction<void(int value)> Function)
-// // {
+    if(UWorld* World = GetWorld())
+    {
+        if (APlayerController* Controller = World->GetFirstPlayerController())
+        {
+            FInputModeUIOnly InputMode;
+            InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+            InputMode.SetWidgetToFocus(TakeWidget());
+            Controller->SetInputMode(InputMode);
+            Controller->SetShowMouseCursor(true);
+        }
+        
+    }
+}
 
-// // }
 
-// // void UGraphicsSettingsWidget::GraphicsSwitch(TFunction<void(int value)> Function)
-// {
-    
-// }
+//Graphics property setters
+
+void UGraphicsSettingsWidget::ValidateGaphicsSettings()
+{
+    GameUserSettings->ValidateSettings();
+}
 
 void UGraphicsSettingsWidget::ApplyGraphicsSettings()
 {
     GameUserSettings->LoadSettings();
 }
-
-//Graphics property setters
 
 void UGraphicsSettingsWidget::EnableHDR(bool value)
 {
@@ -46,103 +55,84 @@ void UGraphicsSettingsWidget::EnableHDR(bool value)
 }
 
 void UGraphicsSettingsWidget::EnableVSync(bool value)
-{
+{   
     GameUserSettings->SetVSyncEnabled(value);
     GameUserSettings->ApplySettings(true);
 }
 
-void UGraphicsSettingsWidget::SetAntiAliasing(int value)   
+void UGraphicsSettingsWidget::SetAntiAliasing(int32 value)   
 {
-    value = FMath::Clamp(value,-1,1);
-    AntiAliasingValue += value;
-    AntiAliasingValue = FMath::Clamp(AntiAliasingValue, 0, 4);
-    GameUserSettings->SetAntiAliasingQuality(AntiAliasingValue);
-    UE_LOG(LogTemp, Warning, TEXT("AA----------: %d"), AntiAliasingValue);
+    int InValue = GameUserSettings->GetAntiAliasingQuality();
+    InValue = InValue + (FMath::Clamp(value, -1, 1));
+    GameUserSettings->SetAntiAliasingQuality(InValue);
     GameUserSettings->ApplySettings(true);
 }
 
 void UGraphicsSettingsWidget::SetFrameRate(int value)
 {
-    value = FMath::Clamp(value,-1,1);
-    GameUserSettings;
+    float InValue = GameUserSettings->GetFrameRateLimit();
+    value = FMath::Clamp(value, -1, 1);
+    InValue = InValue + (value > 0 ? 30.f : -30.f);
+    GameUserSettings->SetFrameRateLimit(InValue);
+    InValue = FMath::Clamp(InValue, 0.f, 120.f);
     GameUserSettings->ApplySettings(true);
 }
 
-void UGraphicsSettingsWidget::SetGlobalIllumination(int value)
+void UGraphicsSettingsWidget::SetOverallScalability(int32 value)
 {
-    value = FMath::Clamp(value,-1,1);
-    GameUserSettings;
+    int32 InValue = GameUserSettings->GetOverallScalabilityLevel();
+    InValue = InValue + (FMath::Clamp(value, -1, 1));
+    GameUserSettings->SetOverallScalabilityLevel(InValue);
     GameUserSettings->ApplySettings(true);
 }
 
-void UGraphicsSettingsWidget::SetOverallScalability(int value)
+void UGraphicsSettingsWidget::SetPostProcessing(int32 value)
 {
-    value = FMath::Clamp(value,-1,1);
-    GameUserSettings;
+    int32 InValue = GameUserSettings->GetPostProcessingQuality();
+    InValue = InValue + (FMath::Clamp(value, -1, 1));
+    GameUserSettings->SetPostProcessingQuality(InValue);
     GameUserSettings->ApplySettings(true);
 }
 
-void UGraphicsSettingsWidget::SetPostProcessing(int value)
+void UGraphicsSettingsWidget::SetShading(int32 value)
 {
-    value = FMath::Clamp(value,-1,1);
-    AntiAliasingValue += value;
-    AntiAliasingValue = FMath::Clamp(AntiAliasingValue, 0, 4);
-    GameUserSettings->SetPostProcessingQuality(AntiAliasingValue);
-    UE_LOG(LogTemp, Warning, TEXT("AA----------: %d"), AntiAliasingValue);
+    int InValue = GameUserSettings->GetShadingQuality();
+    InValue = InValue + (FMath::Clamp(value, -1, 1));
+    GameUserSettings->SetShadingQuality(InValue);
     GameUserSettings->ApplySettings(true);
 }
 
-void UGraphicsSettingsWidget::SetReflection(int value)
+void UGraphicsSettingsWidget::SetShadow(int32 value)
 {
-    value = FMath::Clamp(value,-1,1);
-    GameUserSettings;
+    int InValue = GameUserSettings->GetShadingQuality();
+    InValue = InValue + (FMath::Clamp(value, -1, 1));
+    GameUserSettings->SetShadowQuality(InValue);
     GameUserSettings->ApplySettings(true);
 }
 
-void UGraphicsSettingsWidget::SetScreenResolution(int value)
+void UGraphicsSettingsWidget::SetTexture(int32 value)
 {
-    value = FMath::Clamp(value,-1,1);
-    GameUserSettings;
+    int InValue = GameUserSettings->GetTextureQuality();
+    InValue = InValue + (FMath::Clamp(value, -1, 1));
+    GameUserSettings->SetTextureQuality(InValue);
     GameUserSettings->ApplySettings(true);
 }
 
-void UGraphicsSettingsWidget::SetShading(int value)
+void UGraphicsSettingsWidget::SetViewDistance(int32 value)
 {
-    value = FMath::Clamp(value,-1,1);
-    GameUserSettings;
+    int InValue = GameUserSettings->GetViewDistanceQuality();
+    InValue = InValue + (FMath::Clamp(value, -1, 1));
+    GameUserSettings->SetViewDistanceQuality(InValue);
     GameUserSettings->ApplySettings(true);
 }
 
-void UGraphicsSettingsWidget::SetShadow(int value)
+void UGraphicsSettingsWidget::SetVisualEffects(int32 value)
 {
-    value = FMath::Clamp(value,-1,1);
-    GameUserSettings;
+    int InValue = GameUserSettings->GetVisualEffectQuality();
+    InValue = InValue + (FMath::Clamp(value, -1, 1));
+    GameUserSettings->SetVisualEffectQuality(InValue);
     GameUserSettings->ApplySettings(true);
 }
-
-void UGraphicsSettingsWidget::SetTexture(int value)
-{
-    value = FMath::Clamp(value,-1,1);
-    GameUserSettings;
-    GameUserSettings->ApplySettings(true);
-}
-
-void UGraphicsSettingsWidget::SetViewDistance(int value)
-{
-    value = FMath::Clamp(value,-1,1);
-    GameUserSettings;
-    GameUserSettings->ApplySettings(true);
-}
-
-void UGraphicsSettingsWidget::SetVisualEffects(int value)
-{
-    value = FMath::Clamp(value,-1,1);
-    GameUserSettings;
-    GameUserSettings->ApplySettings(true);
-}
-
-
-
 
 
 
