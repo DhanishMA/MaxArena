@@ -10,7 +10,12 @@
 		}
 	],
 	"settings": {
-		"typescript.tsc.autoDetect": "off"
+		"typescript.tsc.autoDetect": "off",
+		"dotnet.defaultSolution": "MaxArena/MaxArena.sln",
+		"files.associations": {
+			"system_error": "cpp",
+			"xlocale": "cpp"
+		}
 	},
 	"extensions": {
 		"recommendations": [

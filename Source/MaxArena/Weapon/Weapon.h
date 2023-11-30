@@ -23,4 +23,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+private:
+	UPROPERTY(EditAnywhere)
+	USkeletalMeshComponent* WeaponMesh;
+	UPROPERTY(EditAnywhere)
+	class USphereComponent* CollisionSphere;
+	UPROPERTY(EditAnywhere)
+	class UWidgetComponent* PickupStateWidget;
+
 };
