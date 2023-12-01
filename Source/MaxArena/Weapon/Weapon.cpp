@@ -4,6 +4,7 @@
 #include "Weapon.h"
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
+#include "MaxArena/Character/Hero.h"
 
 // Sets default values
 AWeapon::AWeapon()
@@ -51,16 +52,17 @@ void AWeapon::Tick(float DeltaTime)
 
 //Sphere collision interaction functions
 
-UFUNCTION()
 void AWeapon::OnSphereOverlap( UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	PickupWidget->SetVisibility(true);
+	if(AHero* OverlappedPawn = Cast<AHero>(OtherActor)) OverlappedPawn->SetOverlappedWeapon(this);
 }
 	
-UFUNCTION()
 void AWeapon::OnSphereEndOverlap( UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-	PickupWidget->SetVisibility(false);
+	if(AHero* OverlappedPawn = Cast<AHero>(OtherActor)) OverlappedPawn->SetOverlappedWeapon(nullptr);
 }
 
-
+void AWeapon::SetPickupWidgerVisibility(bool bSetVisibility)
+{
+	PickupWidget->SetVisibility(bSetVisibility);
+}

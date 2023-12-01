@@ -4,6 +4,8 @@
 #include "Hero.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "MaxArena/Weapon/Weapon.h"
+#include "Net/UnrealNetwork.h"
 
 AHero::AHero()
 {
@@ -30,6 +32,13 @@ void AHero::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AHero::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME_CONDITION(AHero, OverlappedWeapon, COND_OwnerOnly);
 }
 
 void AHero::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -62,5 +71,21 @@ void AHero::MoveRitght(float value)
 	ACharacter::AddMovementInput(RightVector, value);
 }
 
+//Weapon handiling fuctions
 
+void AHero::SetOverlappedWeapon(AWeapon* Weapon)
+{
+	if(Weapon) Weapon->SetPickupWidgerVisibility(false);
+	if(IsLocallyControlled()) 
+	{
+		if(Weapon) Weapon->SetPickupWidgerVisibility(true);
+		else OverlappedWeapon->SetPickupWidgerVisibility(false);
+	}
+	OverlappedWeapon = Weapon;
+}
 
+void AHero::OnRep_OverlappedWeapon(AWeapon* LastWeapon)
+{
+	if(OverlappedWeapon) OverlappedWeapon->SetPickupWidgerVisibility(true);
+	if(LastWeapon) LastWeapon->SetPickupWidgerVisibility(false);
+}

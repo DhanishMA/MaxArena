@@ -13,9 +13,17 @@ class MAXARENA_API AHero : public ACharacter
 
 public:
 	AHero();
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
+	void SetOverlappedWeapon(class AWeapon* Weapon);
 
 protected:
 	virtual void BeginPlay() override;
+
+	UPROPERTY(ReplicatedUsing = OnRep_OverlappedWeapon)
+	class AWeapon* OverlappedWeapon;
+
+	UFUNCTION()
+	void OnRep_OverlappedWeapon(class AWeapon* LastWeapon);
 
 public:	
 	virtual void Tick(float DeltaTime) override;
