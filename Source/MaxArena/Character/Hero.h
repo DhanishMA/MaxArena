@@ -29,6 +29,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void PostInitializeComponents() override;
 
 private:
 	UPROPERTY(EditDefaultsOnly, Category = Camera)
@@ -36,8 +37,15 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = Camera)
 	class USpringArmComponent* TPPSpringArm;
 
+	UPROPERTY(EditDefaultsOnly)
+	class UCompatComponent* CompatComponent;
+
 protected:
 	void MoveForward(float value);
 	void MoveRitght(float value);
+	void EquipButtonPressed();
+
+	UFUNCTION(Server, Reliable)
+	void ServerEquipButtonPressed();
 
 };

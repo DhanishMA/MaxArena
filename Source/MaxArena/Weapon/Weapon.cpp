@@ -64,5 +64,5 @@ void AWeapon::OnSphereEndOverlap( UPrimitiveComponent* OverlappedComponent, AAct
 
 void AWeapon::SetPickupWidgerVisibility(bool bSetVisibility)
 {
-	PickupWidget->SetVisibility(bSetVisibility);
+	if(PickupWidget) PickupWidget->SetVisibility(bSetVisibility);
 }

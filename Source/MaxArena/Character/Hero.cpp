@@ -6,11 +6,11 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "MaxArena/Weapon/Weapon.h"
 #include "Net/UnrealNetwork.h"
+#include "MaxArena/Componets/CompatComponent.h"
 
 AHero::AHero()
 {
 	PrimaryActorTick.bCanEverTick = true;
-	// bReplicates = true;
 
 	TPPSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("TPPSpringArm"));
 	TPPSpringArm->SetupAttachment(RootComponent);
@@ -19,6 +19,8 @@ AHero::AHero()
 	TPPCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("TPPCamera"));
 	TPPCamera->SetupAttachment(TPPSpringArm);
 	
+	CompatComponent = CreateDefaultSubobject<UCompatComponent>(TEXT("CompatComponent"));
+	CompatComponent->SetIsReplicated(true);
 	
 }
 
@@ -34,6 +36,13 @@ void AHero::Tick(float DeltaTime)
 
 }
 
+void AHero::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	CompatComponent->OwningCharacter = this;
+}
+
 void AHero::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -47,6 +56,7 @@ void AHero::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAction("Jump",IE_Pressed , this, &ACharacter::Jump);
 	// PlayerInputComponent->BindAction("Crouch",IE_Pressed , this, &ACharacter::Crouch);
+	PlayerInputComponent->BindAction("EquipeWeapon", IE_Pressed, this, &AHero::EquipButtonPressed);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AHero::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AHero::MoveRitght);
@@ -71,6 +81,16 @@ void AHero::MoveRitght(float value)
 	ACharacter::AddMovementInput(RightVector, value);
 }
 
+void AHero::EquipButtonPressed()
+{	
+	if(HasAuthority())
+	{
+		if(CompatComponent) CompatComponent->EquipWeapon(OverlappedWeapon);
+	}
+
+	else ServerEquipButtonPressed();
+}
+
 //Weapon handiling fuctions
 
 void AHero::SetOverlappedWeapon(AWeapon* Weapon)
@@ -89,3 +109,9 @@ void AHero::OnRep_OverlappedWeapon(AWeapon* LastWeapon)
 	if(OverlappedWeapon) OverlappedWeapon->SetPickupWidgerVisibility(true);
 	if(LastWeapon) LastWeapon->SetPickupWidgerVisibility(false);
 }
+
+void AHero::ServerEquipButtonPressed_Implementation()
+{
+	if(CompatComponent) CompatComponent->EquipWeapon(OverlappedWeapon);
+}
+
