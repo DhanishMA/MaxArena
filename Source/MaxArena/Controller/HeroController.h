@@ -25,5 +25,6 @@ protected:
 	TArray<TSubclassOf<ACharacter>> CharacterArray;
 	virtual void BeginPlay() override;
 
-	void SpawnCharacter(TSubclassOf<ACharacter> *newCharacterClass);
+	UFUNCTION(Server, Reliable)
+	void ServerSpawnCharacter(TSubclassOf<ACharacter> newCharacterClass);
 };

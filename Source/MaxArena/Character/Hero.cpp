@@ -8,6 +8,7 @@
 AHero::AHero()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	// bReplicates = true;
 
 	TPPSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("TPPSpringArm"));
 	TPPSpringArm->SetupAttachment(RootComponent);
