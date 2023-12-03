@@ -95,12 +95,12 @@ void AHero::EquipButtonPressed()
 
 void AHero::SetOverlappedWeapon(AWeapon* Weapon)
 {
-	if(OverlappedWeapon != nullptr) OverlappedWeapon->SetPickupWidgerVisibility(false);
-	OverlappedWeapon = Weapon;
 	if(IsLocallyControlled()) 
 	{
-		if(OverlappedWeapon) OverlappedWeapon->SetPickupWidgerVisibility(true);
+		if(OverlappedWeapon) OverlappedWeapon->SetPickupWidgerVisibility(false);
+		if(Weapon) Weapon->SetPickupWidgerVisibility(true);
 	}
+	OverlappedWeapon = Weapon;
 }
 
 void AHero::OnRep_OverlappedWeapon(AWeapon* LastWeapon)
@@ -113,4 +113,6 @@ void AHero::ServerEquipButtonPressed_Implementation()
 {
 	if(CompatComponent) CompatComponent->EquipWeapon(OverlappedWeapon);
 }
+
+
 
