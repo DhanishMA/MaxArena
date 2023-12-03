@@ -5,8 +5,8 @@
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "MaxArena/Character/Hero.h"
+#include "Net/UnrealNetwork.h"
 
-// Sets default values
 AWeapon::AWeapon()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -28,7 +28,6 @@ AWeapon::AWeapon()
 
 }
 
-// Called when the game starts or when spawned
 void AWeapon::BeginPlay()
 {
 	Super::BeginPlay();
@@ -43,14 +42,20 @@ void AWeapon::BeginPlay()
 	if(PickupWidget) PickupWidget->SetVisibility(false);
 }
 
-// Called every frame
 void AWeapon::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
-//Sphere collision interaction functions
+void AWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AWeapon, WeaponState);
+}
+
+////Sphere collision interaction functions
 
 void AWeapon::OnSphereOverlap( UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
@@ -62,7 +67,39 @@ void AWeapon::OnSphereEndOverlap( UPrimitiveComponent* OverlappedComponent, AAct
 	if(AHero* OverlappedPawn = Cast<AHero>(OtherActor)) OverlappedPawn->SetOverlappedWeapon(nullptr);
 }
 
+////
+
 void AWeapon::SetPickupWidgerVisibility(bool bSetVisibility)
 {
 	if(PickupWidget != nullptr) PickupWidget->SetVisibility(bSetVisibility);
 }
+
+void AWeapon::SetWeaponState(EWeaponState State)
+{
+	WeaponState = State;
+	switch(WeaponState)
+	{
+		case EWeaponState::EWS_Equipped :
+			SetPickupWidgerVisibility(false);
+			CollisionSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
+}
+
+void AWeapon::OnRep_WeaponState()
+{
+	switch(WeaponState)
+	{
+		case EWeaponState::EWS_Equipped :
+			SetPickupWidgerVisibility(false);
+	}
+}
+
+
+
+
+
+
+
+
+
+

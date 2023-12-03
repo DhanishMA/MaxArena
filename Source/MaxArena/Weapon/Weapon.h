@@ -6,25 +6,30 @@
 #include "GameFramework/Actor.h"
 #include "Weapon.generated.h"
 
+UENUM(BlueprintType)
+enum class EWeaponState : uint8
+{
+	EWS_Initial UMETA(DisplayName = "Initial State"),
+	EWS_Equipped UMETA(DisplayName = "Equipped"),
+	EWS_Dropped UMETA(DisplayName = "Dropped"),
+
+	EWS_Max UMETA(DisplayName = "Default Max")
+};
+
 UCLASS()
 class MAXARENA_API AWeapon : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
 	AWeapon();
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	void SetPickupWidgerVisibility(bool bSetVisibility);
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
+	void SetWeaponState(EWeaponState State);
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-public:	
-	void SetPickupWidgerVisibility(bool bSetVisibility);
-
-private:
 	UPROPERTY(EditAnywhere)
 	USkeletalMeshComponent* WeaponMesh;
 	UPROPERTY(EditAnywhere)
@@ -49,6 +54,11 @@ private:
 		UPrimitiveComponent* OtherComp,
 		int32 OtherBodyIndex
 	);
+
+	UFUNCTION()
+	void OnRep_WeaponState();
+	UPROPERTY(ReplicatedUsing = OnRep_WeaponState, VisibleAnywhere, Category = "Weapon Properties")
+	EWeaponState WeaponState;
 
 };
 

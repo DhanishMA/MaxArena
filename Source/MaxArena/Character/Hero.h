@@ -15,35 +15,28 @@ public:
 	AHero();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
 	void SetOverlappedWeapon(class AWeapon* Weapon);
-
-protected:
-	virtual void BeginPlay() override;
-
-	UPROPERTY(ReplicatedUsing = OnRep_OverlappedWeapon)
-	class AWeapon* OverlappedWeapon;
-
-	UFUNCTION()
-	void OnRep_OverlappedWeapon(class AWeapon* LastWeapon);
-
-public:	
 	virtual void Tick(float DeltaTime) override;
-
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void PostInitializeComponents() override;
 
-private:
+protected:
+	virtual void BeginPlay() override;
+	UPROPERTY(ReplicatedUsing = OnRep_OverlappedWeapon)
+	class AWeapon* OverlappedWeapon;
+	UFUNCTION()
+	void OnRep_OverlappedWeapon(class AWeapon* LastWeapon);
 	UPROPERTY(EditDefaultsOnly, Category = Camera)
 	class UCameraComponent* TPPCamera;
 	UPROPERTY(EditDefaultsOnly, Category = Camera)
 	class USpringArmComponent* TPPSpringArm;
-
 	UPROPERTY(EditDefaultsOnly)
 	class UCompatComponent* CompatComponent;
 
-protected:
 	void MoveForward(float value);
 	void MoveRitght(float value);
 	void EquipButtonPressed();
+	void FireButtonPressed();
+	void FireButtonReleased();
 
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();
