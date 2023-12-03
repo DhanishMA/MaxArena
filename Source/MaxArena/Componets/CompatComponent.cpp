@@ -5,11 +5,18 @@
 #include "MaxArena/Weapon/Weapon.h"
 #include "MaxArena/Character/Hero.h"
 #include "Engine/SkeletalMeshSocket.h"
+#include "Net/UnrealNetwork.h"
+#include "GameFramework/Actor.h"
 
 UCompatComponent::UCompatComponent()
 {
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = false;
+}
 
+void UCompatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const 
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(UCompatComponent, EquippedWeapon);
 }
 
 void UCompatComponent::BeginPlay()
@@ -36,21 +43,34 @@ void UCompatComponent::EquipWeapon(class AWeapon* WeaponToEquip)
 	{
 		WeaponSocket->AttachActor(EquippedWeapon, OwningCharacter->GetMesh());
 	}
-	EquippedWeapon->SetOwner(OwningCharacter);
+	EquippedWeapon->SetOwner(OwningCharacter); 
 }
 
+////Firing Mechanism
+
+//Called from local machine
 void UCompatComponent::SetShouldFire(bool bShouldFire)
-{
+{	
 	if(bShouldFire)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Fired"));
+		ServerFire();
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Fire Halted"));
 	}
 }
 
+//Called from server
+void UCompatComponent::ServerFire_Implementation()
+{
+	MulticastFire();
+}
+
+//Called from server to execute in all machines
+void UCompatComponent::MulticastFire_Implementation()
+{
+	if(EquippedWeapon) EquippedWeapon->Fire();
+}
 
 
 

@@ -20,7 +20,6 @@ AHero::AHero()
 	TPPCamera->SetupAttachment(TPPSpringArm);
 	
 	CompatComponent = CreateDefaultSubobject<UCompatComponent>(TEXT("CompatComponent"));
-	CompatComponent->SetIsReplicated(true);
 	
 }
 
@@ -40,6 +39,8 @@ void AHero::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
+	
+	CompatComponent->SetIsReplicated(true);
 	CompatComponent->OwningCharacter = this;
 }
 

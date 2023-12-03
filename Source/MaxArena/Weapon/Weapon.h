@@ -27,6 +27,7 @@ public:
 	void SetPickupWidgerVisibility(bool bSetVisibility);
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
 	void SetWeaponState(EWeaponState State);
+	void Fire();
 
 protected:
 	virtual void BeginPlay() override;
@@ -36,6 +37,8 @@ protected:
 	class USphereComponent* CollisionSphere;
 	UPROPERTY(EditAnywhere)
 	class UWidgetComponent* PickupWidget;
+	UPROPERTY(EditAnywhere, Category = "Weapon Properties")
+	class UAnimationAsset* FireAnimation;
 
 	UFUNCTION()
 	virtual void OnSphereOverlap(

@@ -18,12 +18,18 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	friend class AHero;
 	void EquipWeapon(class AWeapon* WeaponToEquip);
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
 	virtual void BeginPlay() override;
 	AHero* OwningCharacter;
+	UPROPERTY(Replicated)
 	AWeapon* EquippedWeapon;
 	void SetShouldFire(bool bShouldFire);
+	UFUNCTION(Server, Reliable)
+	void ServerFire();
+	UFUNCTION(NetMulticast, Reliable)
+	void MulticastFire();
 
 		
 };

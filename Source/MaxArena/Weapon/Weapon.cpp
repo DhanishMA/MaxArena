@@ -6,6 +6,8 @@
 #include "Components/WidgetComponent.h"
 #include "MaxArena/Character/Hero.h"
 #include "Net/UnrealNetwork.h"
+#include "Animation/AnimationAsset.h"
+#include "Components/SkeletalMeshComponent.h"
 
 AWeapon::AWeapon()
 {
@@ -68,6 +70,21 @@ void AWeapon::OnSphereEndOverlap( UPrimitiveComponent* OverlappedComponent, AAct
 }
 
 ////
+
+////Fire mechanism
+void AWeapon::Fire()
+{	
+	if(FireAnimation && WeaponMesh)
+	{
+		WeaponMesh->PlayAnimation(FireAnimation, false);
+		
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Fire Halted"));
+	}
+}
+
 
 void AWeapon::SetPickupWidgerVisibility(bool bSetVisibility)
 {
