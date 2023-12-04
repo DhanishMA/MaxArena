@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "CompatComponent.generated.h"
 
+#define MaxTraceDistance 8000.f
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class MAXARENA_API UCompatComponent : public UActorComponent
@@ -30,6 +31,6 @@ protected:
 	void ServerFire();
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastFire();
-
+	void GetCrosshairHitResult(FHitResult& CrosshairHitResult);
 		
 };

@@ -7,6 +7,7 @@
 #include "MaxArena/Weapon/Weapon.h"
 #include "Net/UnrealNetwork.h"
 #include "MaxArena/Componets/CompatComponent.h"
+#include "Components/CapsuleComponent.h"
 
 AHero::AHero()
 {
@@ -18,8 +19,11 @@ AHero::AHero()
 
 	TPPCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("TPPCamera"));
 	TPPCamera->SetupAttachment(TPPSpringArm);
-	
 	CompatComponent = CreateDefaultSubobject<UCompatComponent>(TEXT("CompatComponent"));
+	if(UCapsuleComponent* CapsuleComp = GetCapsuleComponent())
+	{
+		CapsuleComp->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block);
+	}
 	
 }
 
