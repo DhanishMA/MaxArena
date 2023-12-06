@@ -8,6 +8,7 @@
 void AProjectileWeapon::Fire(const FVector& TraceHitLocation)
 {
     Super::Fire(TraceHitLocation);
+    if(!HasAuthority()) return;
     if(WeaponMesh == nullptr) return;
     const USkeletalMeshSocket* MuzzleSocket = WeaponMesh->GetSocketByName(FName("MuzzleFlash"));
     FTransform MuzzleSocketTransform;

@@ -31,8 +31,6 @@ void UCompatComponent::BeginPlay()
 void UCompatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	GetCrosshairHitResult(HitResult);
-	// ...
 }
 
 void UCompatComponent::EquipWeapon(class AWeapon* WeaponToEquip)
@@ -55,23 +53,22 @@ void UCompatComponent::SetShouldFire(bool bShouldFire)
 {	
 	if(bShouldFire)
 	{
-		ServerFire();
-	}
-	else
-	{
+		FHitResult HitResult;
+		GetCrosshairHitResult(HitResult);
+		ServerFire(HitResult.ImpactPoint);
 	}
 }
 
 //Called from server
-void UCompatComponent::ServerFire_Implementation()
+void UCompatComponent::ServerFire_Implementation(FVector_NetQuantize TraceHitPoint)
 {
-	MulticastFire();
+	MulticastFire(TraceHitPoint);
 }
 
 //Called from server to execute in all machines
-void UCompatComponent::MulticastFire_Implementation()
+void UCompatComponent::MulticastFire_Implementation(FVector_NetQuantize TraceHitPoint)
 {
-	if(EquippedWeapon != nullptr && HitResult.IsValidBlockingHit()) EquippedWeapon->Fire(HitResult.ImpactPoint);
+	if(EquippedWeapon != nullptr) EquippedWeapon->Fire(TraceHitPoint);
 }
 
 ////
@@ -99,10 +96,6 @@ void UCompatComponent::GetCrosshairHitResult(FHitResult& CrosshairHitResult)
 		if(!CrosshairHitResult.bBlockingHit)
 		{
 			CrosshairHitResult.ImpactPoint = End;
-		}
-		else
-		{
-			DrawDebugSphere(GetWorld(), CrosshairHitResult.ImpactPoint, 16, 16, FColor::Red);
 		}
 	}
 	

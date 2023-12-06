@@ -21,5 +21,8 @@ protected:
 	class UBoxComponent* BoxCollisionComp;
 	UPROPERTY(VisibleAnywhere)
 	class UProjectileMovementComponent* ProjectileMovementComp;
+	class UParticleSystemComponent* TracerParticleComp;
+	UPROPERTY(EditAnywhere)
+	class UParticleSystem* TracerParticle; 
 
 };

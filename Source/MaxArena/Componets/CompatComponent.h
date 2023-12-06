@@ -22,16 +22,15 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
-	FHitResult HitResult;
 	virtual void BeginPlay() override;
 	AHero* OwningCharacter;
 	UPROPERTY(Replicated)
 	AWeapon* EquippedWeapon;
 	void SetShouldFire(bool bShouldFire);
 	UFUNCTION(Server, Reliable)
-	void ServerFire();
+	void ServerFire(FVector_NetQuantize TraceHitPoint);
 	UFUNCTION(NetMulticast, Reliable)
-	void MulticastFire();
+	void MulticastFire(FVector_NetQuantize TraceHitPoint);
 	void GetCrosshairHitResult(FHitResult& CrosshairHitResult);
 		
 };
