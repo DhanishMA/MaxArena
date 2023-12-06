@@ -14,6 +14,7 @@ class MAXARENA_API AProjectile : public AActor
 public:	
 	AProjectile();
 	virtual void Tick(float DeltaTime) override;
+	virtual void Destroyed() override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -24,5 +25,12 @@ protected:
 	class UParticleSystemComponent* TracerParticleComp;
 	UPROPERTY(EditAnywhere)
 	class UParticleSystem* TracerParticle; 
+
+	UFUNCTION()
+	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* ImpactParticle;
+	UPROPERTY(EditAnywhere)
+	class USoundCue* ImpactSound;
 
 };
