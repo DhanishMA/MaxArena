@@ -17,6 +17,9 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+	UPROPERTY(EditAnywhere)
 	class UBoxComponent* BoxCollisionComp;
+	UPROPERTY(VisibleAnywhere)
+	class UProjectileMovementComponent* ProjectileMovementComp;
 
 };

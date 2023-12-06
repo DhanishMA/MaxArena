@@ -31,7 +31,6 @@ void UCompatComponent::BeginPlay()
 void UCompatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	FHitResult HitResult;
 	GetCrosshairHitResult(HitResult);
 	// ...
 }
@@ -72,7 +71,7 @@ void UCompatComponent::ServerFire_Implementation()
 //Called from server to execute in all machines
 void UCompatComponent::MulticastFire_Implementation()
 {
-	if(EquippedWeapon) EquippedWeapon->Fire();
+	if(EquippedWeapon != nullptr && HitResult.IsValidBlockingHit()) EquippedWeapon->Fire(HitResult.ImpactPoint);
 }
 
 ////

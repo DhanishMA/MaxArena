@@ -14,4 +14,8 @@ class MAXARENA_API AProjectileWeapon : public AWeapon
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void Fire(const FVector& TraceHitLocation) override;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class AProjectile> ProjectileClass;
 };

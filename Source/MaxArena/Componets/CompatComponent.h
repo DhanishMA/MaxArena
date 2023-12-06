@@ -22,6 +22,7 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 protected:
+	FHitResult HitResult;
 	virtual void BeginPlay() override;
 	AHero* OwningCharacter;
 	UPROPERTY(Replicated)

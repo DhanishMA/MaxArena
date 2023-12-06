@@ -27,7 +27,7 @@ public:
 	void SetPickupWidgerVisibility(bool bSetVisibility);
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const;
 	void SetWeaponState(EWeaponState State);
-	void Fire();
+	virtual void Fire(const FVector& TraceHitLocation);
 
 protected:
 	virtual void BeginPlay() override;
@@ -62,6 +62,8 @@ protected:
 	void OnRep_WeaponState();
 	UPROPERTY(ReplicatedUsing = OnRep_WeaponState, VisibleAnywhere, Category = "Weapon Properties")
 	EWeaponState WeaponState;
+
+	FORCEINLINE USkeletalMeshComponent* GetWeaponMesh(){ return WeaponMesh; }
 
 };
 

@@ -72,17 +72,9 @@ void AWeapon::OnSphereEndOverlap( UPrimitiveComponent* OverlappedComponent, AAct
 ////
 
 ////Fire mechanism
-void AWeapon::Fire()
+void AWeapon::Fire(const FVector& TraceHitLocation)
 {	
-	if(FireAnimation && WeaponMesh)
-	{
-		WeaponMesh->PlayAnimation(FireAnimation, false);
-		
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Fire Halted"));
-	}
+	if(FireAnimation && WeaponMesh) WeaponMesh->PlayAnimation(FireAnimation, false);
 }
 
 
