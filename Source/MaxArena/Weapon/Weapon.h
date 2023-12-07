@@ -31,13 +31,13 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* WeaponMesh;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	class USphereComponent* CollisionSphere;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	class UWidgetComponent* PickupWidget;
-	UPROPERTY(EditAnywhere, Category = "Weapon Properties")
+	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
 	class UAnimationAsset* FireAnimation;
 
 	UFUNCTION()

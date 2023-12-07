@@ -65,6 +65,16 @@
 		"directory": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Source"
 	},
 	{
+		"file": "C:\\\\Users\\\\DhanishMA\\\\Documents\\\\GitHub\\\\MaxArena\\\\Source\\\\MaxArena\\\\Weapon\\\\Case.cpp",
+		"command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe @\"C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\.vscode\\compileCommands_Default\\MaxArena.195.rsp\"",
+		"directory": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Source"
+	},
+	{
+		"file": "C:\\\\Users\\\\DhanishMA\\\\Documents\\\\GitHub\\\\MaxArena\\\\Source\\\\MaxArena\\\\Weapon\\\\Case.h",
+		"command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe @\"C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\.vscode\\compileCommands_Default\\MaxArena.195.rsp\"",
+		"directory": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Source"
+	},
+	{
 		"file": "C:\\\\Users\\\\DhanishMA\\\\Documents\\\\GitHub\\\\MaxArena\\\\Source\\\\MaxArena\\\\Weapon\\\\Projectile.cpp",
 		"command": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe @\"C:\\Users\\DhanishMA\\Documents\\GitHub\\MaxArena\\.vscode\\compileCommands_Default\\MaxArena.195.rsp\"",
 		"directory": "C:\\Program Files\\Epic Games\\UE_4.27\\Engine\\Source"

@@ -4,10 +4,12 @@
 #include "ProjectileWeapon.h"
 #include "Projectile.h"
 #include "Engine/SkeletalMeshSocket.h"
+#include "Case.h"
 
 void AProjectileWeapon::Fire(const FVector& TraceHitLocation)
 {
     Super::Fire(TraceHitLocation);
+    SpawnCase();
     if(!HasAuthority()) return;
     if(WeaponMesh == nullptr) return;
     const USkeletalMeshSocket* MuzzleSocket = WeaponMesh->GetSocketByName(FName("MuzzleFlash"));
@@ -24,6 +26,22 @@ void AProjectileWeapon::Fire(const FVector& TraceHitLocation)
         SpawnParams.Instigator = Cast<APawn>(GetOwner());
         SpawnParams.Owner = GetOwner();
         World->SpawnActor<AProjectile>(ProjectileClass, MuzzleSocketTransform.GetLocation(), ProjectileRotation, SpawnParams);
-        
     }
 }
+
+void AProjectileWeapon::SpawnCase()
+{
+    if(WeaponMesh == nullptr) return;
+    const USkeletalMeshSocket* BulletCaseSocket = WeaponMesh->GetSocketByName(FName("AmmoEject"));
+    FTransform CaseSocketTransform;
+    if(BulletCaseSocket) CaseSocketTransform = BulletCaseSocket->GetSocketTransform(WeaponMesh);
+
+    if(BulletCaseClass)
+    {   
+        UWorld* World = GetWorld();
+        if(World == nullptr) return;
+        World->SpawnActor<ACase>(BulletCaseClass, CaseSocketTransform);
+    }
+}
+
+

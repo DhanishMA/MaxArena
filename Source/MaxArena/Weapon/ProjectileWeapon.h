@@ -18,4 +18,7 @@ public:
 	virtual void Fire(const FVector& TraceHitLocation) override;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class AProjectile> ProjectileClass;
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class ACase> BulletCaseClass;
+	void SpawnCase();
 };
