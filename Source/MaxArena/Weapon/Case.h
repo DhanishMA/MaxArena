@@ -17,11 +17,12 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* CaseMesh;
-	UPROPERTY(VisibleAnywhere)
-	USceneComponent* RootComp;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	class USoundCue* ImpactSound;
+	UPROPERTY(EditAnywhere)
+	float CaseEjectionImpulse;
+	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 };

@@ -2,24 +2,36 @@
 
 
 #include "Case.h"
-// #include "Components/SceneComponent.h"
 #include "Sound/SoundCue.h"
+#include "Kismet/GameplayStatics.h"
 
 ACase::ACase()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("RootComp"));
-	SetRootComponent(RootComp);
 	CaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CaseMesh"));
-	CaseMesh->SetupAttachment(RootComp);
-	ImpactSound = CreateDefaultSubobject<USoundCue>(TEXT("CaseImapctSound"));
+	SetRootComponent(CaseMesh);
+	CaseMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
+	CaseMesh->SetSimulatePhysics(true);
+	CaseMesh->SetEnableGravity(true);
+	CaseMesh->SetNotifyRigidBodyCollision(true);
+	CaseEjectionImpulse = 10.f;
 
 }
 
 void ACase::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CaseMesh->AddImpulse(GetActorForwardVector() * CaseEjectionImpulse);
+	CaseMesh->OnComponentHit.AddDynamic(this, &ACase::OnHit);
+}
+
+void ACase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	if(ImpactSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation());
+	}
+	Destroy();
 }
 
